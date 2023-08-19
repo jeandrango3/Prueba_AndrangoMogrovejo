@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Productos en la Tienda Virtual</h1>
+<ul id="productList"></ul>
+
+<script>
+    async function fetchProducts() {
+        try {
+            const response = await fetch('/api/products');
+            const products = await response.json();
+
+            const productList = document.getElementById('productList');
+
+            products.forEach(product => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    Nombre: ${product.name}, Precio: ${product.price}
+                    <button onclick="addToCart(${product.id})">Agregar al Carrito</button>
+                    <button onclick="showDetails(${product.id})">Ver Detalles</button>
+                    <button onclick="updateProduct(${product.id})">Actualizar Producto</button>
+                `;
+                productList.appendChild(listItem);
+            });
+        } catch (error) {
+            console.error('Error al obtener la lista de productos:', error);
+        }
+    }
+
+    function addToCart(productId) {
+        // Lógica para agregar al carrito
+    }
+
+    function showDetails(productId) {
+        // Lógica para mostrar detalles del producto
+    }
+
+    function updateProduct(productId) {
+        // Lógica para actualizar información del producto
+    }
+
+    fetchProducts();
+</script>
+</body>
+</html>
